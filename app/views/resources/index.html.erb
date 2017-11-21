@@ -3,32 +3,15 @@
 <div class="ui container">
   <div id="resource_cards" class="ui four stackable cards">
     <% Resource.all.each do |resource| %>
-      <%= link_to resource.url, class: "ui card", target: "_blank" do %>
-        <div class="content">
-          <img class="right floated mini ui image" src="<%= resource.image_url %>">
-          <div class="header">
-            <%= resource.title %>
-          </div>
-          <div class="meta">
-            <%= resource.host %>
-          </div>
-          <div class="description">
-            <%= resource.description %>
-          </div>
+      <%= react_component("Resource", resource, { class: "ui card" }) %>
+    <% end %>
+    <div class="ui card">
+      <%= form_for Resource.new, remote: true, html: { class: "ui form" } do |f| %>
+        <div class="field">
+          <%= f.text_field :url, placeholder: "Enter URL" %>
         </div>
-        <!--<div class="extra content">-->
-        <!--  <div class="ui two buttons">-->
-        <!--    <div class="ui basic green button">Approve</div>-->
-        <!--    <div class="ui basic red button">Decline</div>-->
-        <!--  </div>-->
-        <!--</div>-->
-      <% end %>
-    <% end %>
-    <%= link_to new_resource_path, class: "ui card" do %>
-      <div class="ui bottom attached button">
-        <i class="add icon"></i>
-        Add Resource
-      </div>
-    <% end %>
+        <%= f.submit "Add Resource", class: "ui fluid grey button" %>
+      <% end %>  
+    </div>
   </div>
 </div>

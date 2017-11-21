@@ -30,7 +30,9 @@ Resource.scrape('http://example.com')
 ```
 It uses MetaInspector to scrape the url and create a new record with all the relevant metadata. Too easy.
 
-TODO: Lots
+### TODO
+Get in the [React mindset](https://reactjs.org/docs/thinking-in-react.html) and implement [CRUD React functions](https://github.com/applegrain/creact)
+
 
 ## Project Vision
 

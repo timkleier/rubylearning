@@ -24,19 +24,16 @@ class ResourcesController < ApplicationController
   # POST /resources
   # POST /resources.json
   def create
-    if params[:commit] == "Scrape"
-      @resource = Resource.scrape(params[:resource][:url])
-    else
-      @resource = Resource.new(resource_params)
-    end
+    @resource = Resource.scrape(params[:resource][:url])
 
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to resources_path, notice: 'Resource was successfully created.' }
-        format.json { render :show, status: :created, location: @resource }
+        render component: 'Resource', props: { resources: Resource.all }
+        # format.html { redirect_to resources_path, notice: 'Resource was successfully created.' }
+        # format.json { render :show, status: :created, location: @resource }
       else
-        format.html { render :new }
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # format.json { render json: @resource.errors, status: :unprocessable_entity }
       end
     end
   end

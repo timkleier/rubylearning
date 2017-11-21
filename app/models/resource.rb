@@ -1,5 +1,6 @@
 class Resource < ApplicationRecord
-
+  validates_uniqueness_of :title
+  
   def self.scrape(url)
     begin
       page = MetaInspector.new(url)

@@ -8,6 +8,7 @@
 
 User.create(email: 'admin@ourapp.com', admin: true)
 
+Resource.scrape('http://railscasts.com')
 Resource.scrape('http://gorails.com')
 Resource.scrape('http://guides.rubyonrails.org/')
 Resource.scrape('http://codeschool.com')

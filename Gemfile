@@ -46,3 +46,5 @@ end
 
 gem 'semantic-ui-sass'
 gem 'metainspector'
+# gem 'webpacker'
+gem 'react-rails'
