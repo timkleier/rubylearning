@@ -1,5 +1,5 @@
 class Resource < ApplicationRecord
-  validates_uniqueness_of :title
+  validates_uniqueness_of :url
   
   def self.scrape(url)
     begin
