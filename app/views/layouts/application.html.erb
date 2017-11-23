@@ -1,28 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>RubyRailway | Curated Resources for Ruby and Rails Developers</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="ui container">
-    <div id="logo_container" class="ui container">
-      <%= image_tag "logo.png", id: "logo", class: "ui fluid image" %>
+    <div id="logo_container" class="ui red_background container">
+      <%= image_tag "logo.png", id: "logo", alt: "RubyRailway logo", class: "ui fluid image" %>
     </div>
-    <div id="menu_container" class="ui container">
-      <div class="ui menu">
-        <div class="item">
-          Levels
-        </div>
-        <div class="right menu">
-          <div class="item">
-            Filters
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render "layouts/menu" %>
     <%= yield %>
   </div>
 </body>

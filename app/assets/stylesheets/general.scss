@@ -2,8 +2,9 @@ body {
   background: #ddd !important;
 }
 
+.red.button, .red_background { background-color: #ae1a33 !important; }
+
 #logo_container {
-  background-color: #ae1a33;
   padding: 5px;
   #logo { 
     max-width: 250px; 
