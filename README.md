@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-# rubylearning
-Learning resources app for Ruby on Rails developer
-=======
-# Sophia App (name to be refined)
->>>>>>> 6b54d85... another README merge
+# RubyRailway
+Resources and skill development paths for Ruby on Rails developers.
 
 ## Setup
 You'll need to run the following to get the environment setup:
@@ -73,8 +69,4 @@ Potential features/strategies:
 
 Challenges/Questions
 * Connecting resources to their creators
-<<<<<<< HEAD
 * Address likehood of bots trying to enter/post
-=======
-* Address likehood of bots trying to enter/post
->>>>>>> 6b54d85... another README merge
