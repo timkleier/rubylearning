@@ -7,6 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= yield %>
+  <div class="ui container">
+    <div id="logo_container" class="ui container">
+      <%= image_tag "logo.png", id: "logo", class: "ui fluid image" %>
+    </div>
+    <div id="menu_container" class="ui container">
+      <div class="ui menu">
+        <div class="item">
+          Levels
+        </div>
+        <div class="right menu">
+          <div class="item">
+            Filters
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= yield %>
+  </div>
 </body>
 </html>

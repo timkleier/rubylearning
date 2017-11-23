@@ -1,17 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<div class="ui container">
-  <div id="resource_cards" class="ui four stackable cards">
-    <% Resource.all.each do |resource| %>
-      <%= react_component("Resource", resource, { class: "ui card" }) %>
-    <% end %>
-    <div class="ui card">
-      <%= form_for Resource.new, remote: true, html: { class: "ui form" } do |f| %>
-        <div class="field">
-          <%= f.text_field :url, placeholder: "Enter URL" %>
-        </div>
-        <%= f.submit "Add Resource", class: "ui fluid grey button" %>
-      <% end %>  
-    </div>
+<div id="resource_cards" class="ui four stackable cards">
+  <% Resource.all.each do |resource| %>
+    <%= react_component("Resource", resource, { class: "ui card" }) %>
+  <% end %>
+  <div class="ui card">
+    <%= form_for Resource.new, remote: true, html: { class: "ui form" } do |f| %>
+      <div class="field">
+        <%= f.text_field :url, placeholder: "Enter URL" %>
+      </div>
+      <%= f.submit "Add Resource", class: "ui fluid grey button" %>
+    <% end %>  
   </div>
 </div>
