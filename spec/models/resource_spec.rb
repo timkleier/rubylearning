@@ -1,7 +1,9 @@
 require 'rails_helper'
 #<Resource title: nil, description: nil, url: nil, root_url: nil, host: nil, image_url: nil>
 RSpec.describe Resource, type: :model do
-  #TODO build out tests for scraping a URL -Zach
+  # Validation tests
+  it { should validate_uniqueness_of(:title) }
+
   it "scrapes provided URL" do
     resource = Resource.create(url: 'https://www.google.com')
     resource = Resource.scrape(resource.url)
