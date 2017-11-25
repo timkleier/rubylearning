@@ -1,4 +1,6 @@
 class Resource < ApplicationRecord
+  attr_accessor :title_truncated, :description_truncated
+  
   validates_uniqueness_of :url
   
   # https://richonrails.com/articles/active-record-enums-in-ruby-on-rails-4-1
@@ -22,4 +24,14 @@ class Resource < ApplicationRecord
       resource
     end
   end
+  
+  after_find do |resource|
+    self.title_truncated = self.title.truncate(60) if title
+    self.description_truncated = self.description.truncate(200) if description
+  end
+  
+  def attributes
+    super.merge('title_truncated' => self.title_truncated, 'description_truncated' => self.description_truncated)
+  end
+  
 end
