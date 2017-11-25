@@ -7,6 +7,7 @@ class CreateResources < ActiveRecord::Migration[5.1]
       t.string :root_url
       t.string :host
       t.string :image_url
+      t.integer :experience_level
 
       t.timestamps
     end

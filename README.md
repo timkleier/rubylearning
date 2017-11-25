@@ -48,6 +48,8 @@ Key features include:
 * Slick, professional look and feel and intuitive interface/navigation
 * A quick-post capability that allows admins to paste a link for a resource and its metadata is automatically filled in (via MetaInspector)
 * Ability to categorize those resources (beginner/intermediate/advanced/varied)
+* Media/format type (video, text, audio, etc.)
+* Cost (free/dollar amount) & Cost frequency (N/A, one-time, subscription)
 
 Potential strategies/features:
 * Find partner(s) to help us develop a top-notch offering
@@ -61,7 +63,9 @@ We then aim to generate enough momentum with RoR community members engagement to
 
 Key features include:
 * Seamless login (Auth0? Github?)
+* Resources additionally organized into categories (e.g. ruby blocks, array methods, gems, etc.) and/or tags
 * Ability to upvote/downvote resources
+* Creation of paths (based on items completed, suggest next tool)
 
 Potential features/strategies:
 * Invite key creators to customize their resources

@@ -12,4 +12,17 @@ body {
   }
 }
 
+.experience_level_indicator {
+  i:first-child { opacity: 0.3; }
+  i:last-child {
+    overflow: hidden;
+    font-size: 1em !important;
+  }
+  .beginner_level { width: 0.2em; }
+  .advanced_beginner_level { width: 0.4em; }
+  .competent_level { width: 0.6em; }
+  .proficient_level { width: 0.8em; }
+  .expert_level { width: 1.0em; }
+} 
+
 
