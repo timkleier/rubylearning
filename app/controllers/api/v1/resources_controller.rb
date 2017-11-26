@@ -5,42 +5,32 @@ class Api::V1::ResourcesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
-  # GET /resources
-  # GET /resources.json
+  # GET api/v1/resources
+  # GET api/v1/resources.json
   def index
     @resources = Resource.all
     json_response(@resources)
   end
 
-  # GET /resources/1
-  # GET /resources/1.json
+  # GET api/v1/resources/1
   def show
-    json_response(@resources)
+    json_response(@resource)
   end
 
-  # GET /resources/1/edit
-  def edit
-  end
-
-  # POST /resources
-  # POST /resources.json
+  # POST api/v1/resources
   def create
-    @resource = Resource.scrape(params[:resource][:url])
-    if @resource.valid?
-        @resource.save
-        json_response(@resource, :created)
-    end
+    # @resource = Resource.scrape(params[:resource][:url])
+    @resource = Resource.create!(resource_params)
+    json_response(@resource, :created)
   end
 
-  # PATCH/PUT /resources/1
-  # PATCH/PUT /resources/1.json
+  # PATCH/PUT api/v1/resources/1
   def update
     @resource.update(resource_params)
     head :no_content
   end
 
-  # DELETE /resources/1
-  # DELETE /resources/1.json
+  # DELETE api/v1/resources/1
   def destroy
     @resource.destroy
     head :no_content
@@ -54,6 +44,6 @@ class Api::V1::ResourcesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params.require(:resource).permit(:title, :description, :url, :root_url, :host, :image_url)
+      params.permit(:title, :description, :url, :root_url, :host, :image_url)
     end
 end

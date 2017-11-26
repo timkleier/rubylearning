@@ -1,7 +1,7 @@
 class Resource < ApplicationRecord
   attr_accessor :title_truncated, :description_truncated
   
-  validates_uniqueness_of :url
+  validates :url, presence: true, uniqueness: true
   
   # https://richonrails.com/articles/active-record-enums-in-ruby-on-rails-4-1
   enum experience_level: { beginner: 1, advanced_beginner: 2, competent: 3, proficient: 4, expert: 5 }
