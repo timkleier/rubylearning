@@ -52,7 +52,7 @@ Key features include:
 
 Potential strategies/features:
 * Media/format type (video, text, audio, etc.)
-* Cost (free/dollar amount) & Cost frequency (N/A, one-time, subscription)
+* Cost (free/dollar amount) & Cost notes (N/A, one-time, subscription)
 * Find partner(s) to help us develop a top-notch offering
 
 Challenges/Questions

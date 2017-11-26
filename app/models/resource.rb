@@ -25,6 +25,7 @@ class Resource < ApplicationRecord
     end
   end
   
+  # TODO: right tests for this after_find method as well as attributes below
   after_find do |resource|
     self.title_truncated = self.title.truncate(60) if title
     self.description_truncated = self.description.truncate(200) if description
