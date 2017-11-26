@@ -2,7 +2,7 @@ require 'rails_helper'
 #<Resource title: nil, description: nil, url: nil, root_url: nil, host: nil, image_url: nil>
 RSpec.describe Resource, type: :model do
   # Validation tests
-  it { should validate_uniqueness_of(:title) }
+  it { should validate_uniqueness_of(:url) }
 
   it "scrapes provided URL" do
     resource = Resource.create(url: 'https://www.google.com')

@@ -72,7 +72,7 @@ end
 RSpec.configuration do |config|
   # [...]
   # add `FactoryGirl` methods
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
   config.before(:suite) do
