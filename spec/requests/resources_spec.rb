@@ -79,6 +79,37 @@ RSpec.describe 'Resources API', type: :request do
     end
   end
 
+  # Test suite for POST api/v1/resources/scrape
+  describe 'POST /api/v1/resources/scrape' do
+    # valid payload
+    let(:valid_attributes) { { url: 'http://www.google.com' } }
+
+    context 'when the request is valid' do
+      before { post '/api/v1/resources/scrape', params: valid_attributes }
+
+      it 'scrapes a resource' do
+        expect(json['url']).to eq('http://www.google.com/')
+      end
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when the request is invalid' do
+      before { post '/api/v1/resources/scrape', params: { url: 'Testy' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/Validation failed: Url can't be blank/)
+      end
+    end
+  end
+
   # Test suite for PUT api/v1/resources/:id
   describe 'PUT /api/v1/resources/:id' do
     let(:valid_attributes) { { url: 'http://www.google.com' } }

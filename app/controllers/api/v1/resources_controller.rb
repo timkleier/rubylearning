@@ -19,8 +19,13 @@ class Api::V1::ResourcesController < ApplicationController
 
   # POST api/v1/resources
   def create
-    # @resource = Resource.scrape(params[:resource][:url])
     @resource = Resource.create!(resource_params)
+    json_response(@resource, :created)
+  end
+  
+  # POST api/v1/resources/scrape
+  def scrape
+    @resource = Resource.scrape(params[:url])
     json_response(@resource, :created)
   end
 

@@ -1,7 +1,9 @@
+require 'uri'
+
 class Resource < ApplicationRecord
   attr_accessor :title_truncated, :description_truncated
   
-  validates :url, presence: true, uniqueness: true
+  validates :url, presence: true, uniqueness: true, format: { with: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/ }
   
   # https://richonrails.com/articles/active-record-enums-in-ruby-on-rails-4-1
   enum experience_level: { beginner: 1, advanced_beginner: 2, competent: 3, proficient: 4, expert: 5 }
@@ -14,6 +16,8 @@ class Resource < ApplicationRecord
       page = MetaInspector.new(url)
     rescue MetaInspector::TimeoutError
       enqueue_for_future_fetch_attempt(url)
+    rescue MetaInspector::RequestError, MetaInspector::ParserError
+      "There was an error in the request--please check the url"
     else
       resource = Resource.new
       ['title', 'description', 'url'].each do |attribute|

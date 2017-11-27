@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-namespace :api do
-  namespace :v1 do
-    resources :resources
+  namespace :api do
+    namespace :v1 do
+      resources :resources
+      post 'resources/scrape', to: 'resources#scrape'
+    end
   end
-end
 
   resources :users
   resources :resources
