@@ -12,12 +12,14 @@ RSpec.describe Resource, type: :model do
     expect((resource.image_url.present? and resource.description.present?)).to eq(true)
   end
 
+  # No longer exposing resource/new to users, obsolete for now
   it "creates a new resource based on provided info" do
     resource = Resource.create(
       title: 'Real Fake Doors',
       description: 'Tired of doors leading to places? Come on down for some real fake doors!',
       root_url: 'https://www.youtube.com/watch?v=pxbsV8QWGic',
-      image_url: 'https://i.ytimg.com/vi/pxbsV8QWGic/hqdefault.jpg'
+      image_url: 'https://i.ytimg.com/vi/pxbsV8QWGic/hqdefault.jpg',
+      url: 'https://www.youtube.com/watch?v=pxbsV8QWGic'
      )
 
      expect(resource.valid?).to eq(true)

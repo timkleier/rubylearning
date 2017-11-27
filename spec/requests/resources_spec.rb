@@ -97,7 +97,7 @@ RSpec.describe 'Resources API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/resources/scrape', params: { url: 'Testy' } }
+      before { post '/api/v1/resources', params: { url: 'Testy' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -105,7 +105,7 @@ RSpec.describe 'Resources API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Url can't be blank/)
+          .to match(/Validation failed: Url is invalid/)
       end
     end
   end
