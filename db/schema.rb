@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 20171117162112) do
     t.string "root_url"
     t.string "host"
     t.string "image_url"
-    t.integer "experience_level"
+    t.integer "ruby_or_rails"
+    t.integer "skill_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

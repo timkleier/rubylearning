@@ -1,30 +1,43 @@
-require 'uri'
-
 class Resource < ApplicationRecord
   attr_accessor :title_truncated, :description_truncated
   
   validates :url, presence: true, uniqueness: true, format: { with: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/ }
   
-  # https://richonrails.com/articles/active-record-enums-in-ruby-on-rails-4-1
-  enum experience_level: { beginner: 1, advanced_beginner: 2, competent: 3, proficient: 4, expert: 5 }
+  enum skill_level: { varied: 0, beginner: 1, intermediate: 2, advanced: 3 }
+  enum ruby_or_rails: { both: 0, ruby: 1, rails: 2 }
   # enum source_type: { website: 1, blog: 2 }
   # enum format_type: { text: 1, video: 2, audio: 3 }
   # enum length: {}
   
-  def self.scrape(url)
+  def self.scrape(url, attributes = {})
     begin
-      page = MetaInspector.new(url)
+      scraped_url = MetaInspector.new(url)
     rescue MetaInspector::TimeoutError
-      enqueue_for_future_fetch_attempt(url)
+      enqueue_for_future_fetch_attempt(scraped_url)
     rescue MetaInspector::RequestError, MetaInspector::ParserError
       "There was an error in the request--please check the url"
     else
+      self.create_from_url(scraped_url, attributes)
+    end
+  end
+  
+  def self.create_from_url(scraped_url, attributes = {})
+    begin
       resource = Resource.new
-      ['title', 'description', 'url'].each do |attribute|
-        resource.send("#{attribute}=", page.send(attribute))
+      
+      ['title', 'description', 'url'].each do |scraped_attribute|
+        resource.send("#{scraped_attribute}=", scraped_url.send(scraped_attribute))
       end
-      resource.image_url = page.images.best
-      resource.save
+      resource.image_url = scraped_url.images.best
+      
+      attributes.keys.each do |key|
+        resource.send("#{key}=", attributes[key])
+      end
+      
+      resource.save!
+    rescue StandardError => e
+      e.message
+    else
       resource
     end
   end

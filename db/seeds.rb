@@ -8,9 +8,9 @@
 
 User.create(email: 'admin@ourapp.com', admin: true)
 
-Resource.scrape('http://railscasts.com')
-Resource.scrape('http://gorails.com')
-Resource.scrape('http://guides.rubyonrails.org/')
-Resource.scrape('http://codeschool.com')
-Resource.scrape('http://railstutorial.org/book')
-Resource.scrape('http://rubyweekly.com')
+Resource.scrape("http://www.railscasts.com", { skill_level: "intermediate", ruby_or_rails: "rails" })
+Resource.scrape('http://gorails.com', { skill_level: "intermediate", ruby_or_rails: "rails" })
+Resource.scrape('http://guides.rubyonrails.org/', { skill_level: "intermediate", ruby_or_rails: "rails" })
+Resource.scrape('http://codeschool.com', { skill_level: "varied", ruby_or_rails: "both" })
+Resource.scrape('http://railstutorial.org/book', { skill_level: "beginner", ruby_or_rails: "rails" })
+Resource.scrape('http://rubyweekly.com', { skill_level: "advanced", ruby_or_rails: "ruby" })
