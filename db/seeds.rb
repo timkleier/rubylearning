@@ -14,3 +14,4 @@ Resource.scrape('http://guides.rubyonrails.org/', { skill_level: "intermediate",
 Resource.scrape('http://codeschool.com', { skill_level: "varied", ruby_or_rails: "both" })
 Resource.scrape('http://railstutorial.org/book', { skill_level: "beginner", ruby_or_rails: "rails" })
 Resource.scrape('http://rubyweekly.com', { skill_level: "advanced", ruby_or_rails: "ruby" })
+Resource.scrape('http://awesome-ruby.com', { skill_level: "varied", ruby_or_rails: "both" })
