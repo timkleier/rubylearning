@@ -1,4 +1,4 @@
-<%= form_with(model: resource, local: true) do |form| %>
+<%= form_with(model: resource, local: true, html: { class: "ui form" }) do |form| %>
   <% if resource.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(resource.errors.count, "error") %> prohibited this resource from being saved:</h2>
@@ -15,11 +15,6 @@
     <%= form.label :url %>
     <%= form.text_field :url, id: :resource_url %>
   </div>
-  <div class="actions">
-    <%= form.submit "Scrape" %>
-  </div>
-  <br/>
-  <br/>
 
   <div class="field">
     <%= form.label :title %>
@@ -28,7 +23,7 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description, id: :resource_description %>
+    <%= form.text_area :description, id: :resource_description %>
   </div>
 
   <div class="field">
@@ -37,21 +32,12 @@
   </div>
 
   <div class="field">
-    <%= form.label :root_url %>
-    <%= form.text_field :root_url, id: :resource_root_url %>
-  </div>
-
-  <div class="field">
-    <%= form.label :host %>
-    <%= form.text_field :host, id: :resource_host %>
-  </div>
-
-  <div class="field">
     <%= form.label :image_url %>
-    <%= form.text_field :image_url, id: :resource_image_url %>
+    <%= form.hidden_field :image_url %>
+    <%= image_tag form.object.image_url, width: '100px' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Create", class: "ui red button" %>
   </div>
 <% end %>

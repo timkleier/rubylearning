@@ -1,15 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<div id="resource_cards" class="ui four stackable cards">
+<div id="resource_cards" class="ui cards">
   <% Resource.all.each do |resource| %>
-    <%= react_component("Resource", resource, { class: "ui card" }) %>
+    <% # react_component("Resource", resource, { class: "ui card" }) %>
   <% end %>
-  <div class="ui card">
-    <%= form_for Resource.new, remote: true, html: { class: "ui form" } do |f| %>
-      <div class="field">
-        <%= f.text_field :url, placeholder: "Enter URL" %>
+  <% Resource.all.each do |resource| %>
+    <div class="ui fluid resource card">
+      <div class="content">
+        <img class="right floated mini ui image" src=<%= resource.image_url %> />
+        <div class="view_and_votes">
+          <div class="ui red fluid button">VIEW</div>
+          <div class="ui fluid votes mini action input">
+            <button class="ui icon button"><i class="caret down icon"></i></button>
+            <input value="746" type="text" readonly="readonly">
+            <button class="ui icon button"><i class="caret up icon"></i></button>
+          </div>
+        </div>
+        <div class="header"><a href=<%= resource.url %> target="_blank"><%= resource.title.truncate(60) %></a></div>
+        <div class="meta">
+          <div class="ui mini basic label"><i class="book icon"></i> Book</div>
+          <div class="ui mini basic label"><i class="wait icon"></i> 12 hrs</div>
+          <div class="ui mini basic label"><i class="signal icon"></i> Beginner</div>
+          <div class="ui mini basic label"><i class="dollar icon"></i> Free</div>
+        </div>
+        <div class="description">
+          <p><%= resource.description.truncate(200) %></p>
+          <p>
+            <div class="ui grey label">Ruby</div>
+            <div class="ui grey label">Rails</div>
+          </p>
+        </div>
       </div>
-      <%= f.submit "Add Resource", class: "ui fluid grey button" %>
-    <% end %>  
-  </div>
+    </div>
+  <% end %>
 </div>
+
+<%= form_tag(new_resource_path, method: 'get', class: "ui form") do %>
+  <div class="ui action input">
+    <%= text_field_tag :url, nil, placeholder: "Enter URL" %>
+    <%= submit_tag "Add Resource", class: "ui grey button" %>
+  </div>
+<% end %>  

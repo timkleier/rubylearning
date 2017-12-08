@@ -2,6 +2,8 @@ body {
   background: #ddd !important;
 }
 
+a, a:hover { color: black !important; }
+
 .red.button, .red_background { background-color: #ae1a33 !important; }
 
 #logo_container {
@@ -9,6 +11,27 @@ body {
   #logo { 
     max-width: 250px; 
     margin: 5px auto;
+  }
+}
+
+#menu_container {
+  .right.menu { 
+    .item:first-child { padding: 5px 10px; }
+  }
+}
+
+#resource_cards .resource .description { clear: none; }
+
+.view_and_votes {
+  width: 110px;
+  float: left;
+  min-height: 140px;
+  margin-right: 20px;
+  .votes { 
+    margin-top: 10px;
+    button, input { padding: 0.5em !important; }
+    button:first-child { border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important; }
+    input { text-align: center !important; border-radius: 0px !important; }
   }
 }
 

@@ -14,7 +14,11 @@ class ResourcesController < ApplicationController
 
   # GET /resources/new
   def new
-    @resource = Resource.new
+    if params[:commit] = "Add Resource"
+      @resource = Resource.scrape(params[:url])
+    else
+      @resource = Resource.new
+    end
   end
 
   # GET /resources/1/edit
@@ -22,18 +26,14 @@ class ResourcesController < ApplicationController
   end
 
   # POST /resources
-  # POST /resources.json
   def create
-    @resource = Resource.scrape(params[:resource][:url])
+    @resource = Resource.new(resource_params)
 
     respond_to do |format|
       if @resource.save
-        render component: 'Resource', props: { resources: Resource.all }
-        # format.html { redirect_to resources_path, notice: 'Resource was successfully created.' }
-        # format.json { render :show, status: :created, location: @resource }
+        format.html { redirect_to resources_path, notice: 'Resource was successfully created.' }
       else
-        # format.html { render :new }
-        # format.json { render json: @resource.errors, status: :unprocessable_entity }
+        format.html { render :new }
       end
     end
   end
