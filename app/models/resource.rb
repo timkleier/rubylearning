@@ -10,25 +10,28 @@ class Resource < ApplicationRecord
   # enum format_type: { text: 1, video: 2, audio: 3 }
   # enum length: {}
 
-  def self.scrape(url, attributes = {})
+  def self.scrape(url, build = false)
     scraped_url = MetaInspector.new(url)
   rescue MetaInspector::TimeoutError
     enqueue_for_future_fetch_attempt(scraped_url)
   rescue MetaInspector::RequestError, MetaInspector::ParserError
     'There was an error in the request--please check the url'
   else
-    create_from_url(scraped_url, attributes)
+    return scraped_url unless build
+    build_from_scraped_url(scraped_url)
   end
   
-  def self.create_from_url(scraped_url, attributes = {})
+  def self.build_from_scraped_url(scraped_url, attributes = {})
     resource = Resource.new
     %w[title description url].each {|attr| resource.send("#{attr}=", scraped_url.send(attr))}
     resource.image_url = scraped_url.images.best
     attributes.each_key do |key|
       resource.send("#{key}=", attributes[key])
     end
+  rescue NoMethodError => e
+    raise e
   rescue StandardError => e
-    e.message
+    resource.errors.add(e.message)
   else
     resource
   end

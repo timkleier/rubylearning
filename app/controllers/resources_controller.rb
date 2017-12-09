@@ -14,7 +14,7 @@ class ResourcesController < ApplicationController
   # GET /resources/new
   def new
     if params[:commit] = "Add Resource"
-      @resource = Resource.scrape(params[:url])
+      @resource = Resource.scrape(params[:url], true)
     else
       @resource = Resource.new
     end

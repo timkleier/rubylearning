@@ -1,27 +1,26 @@
 require 'rails_helper'
 #<Resource title: nil, description: nil, url: nil, root_url: nil, host: nil, image_url: nil>
 RSpec.describe Resource, type: :model do
-  # Validation tests
-  it { should validate_uniqueness_of(:url) }
 
-  it "scrapes provided URL" do
-    resource = Resource.create(url: 'https://www.google.com')
-    resource = Resource.scrape(resource.url)
-
-    expect(resource.title).to eq("Google")
-    expect((resource.image_url.present? and resource.description.present?)).to eq(true)
+  context 'scrapes provided URL' do
+    resource = Resource.scrape('https://www.google.com', true)
+    it "when building a resource, returns title and custom description" do
+      expect(resource.title).to eq("Google")
+    end
+    it 'returns an error if an invalid URL' do
+      expect(Resource.scrape('https://www.google.c')).to eq('There was an error in the request--please check the url')
+    end
+  end
+  
+  context 'builds record from scraped URL' do
+    scraped_url = Resource.scrape('https://www.google.com')
+    resource = Resource.build_from_scraped_url(scraped_url, { description: "Custom Description" })
+    it 'returns a custom description' do
+      expect(resource.description).to eq('Custom Description')
+    end
+    it 'returns a NoMethodError' do
+      expect{Resource.build_from_url('https://www.google.c')}.to raise_error(NoMethodError)
+    end
   end
 
-  # No longer exposing resource/new to users, obsolete for now
-  it "creates a new resource based on provided info" do
-    resource = Resource.create(
-      title: 'Real Fake Doors',
-      description: 'Tired of doors leading to places? Come on down for some real fake doors!',
-      root_url: 'https://www.youtube.com/watch?v=pxbsV8QWGic',
-      image_url: 'https://i.ytimg.com/vi/pxbsV8QWGic/hqdefault.jpg',
-      url: 'https://www.youtube.com/watch?v=pxbsV8QWGic'
-    )
-
-    expect(resource.valid?).to eq(true)
-  end
 end
