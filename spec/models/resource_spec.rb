@@ -20,8 +20,8 @@ RSpec.describe Resource, type: :model do
       root_url: 'https://www.youtube.com/watch?v=pxbsV8QWGic',
       image_url: 'https://i.ytimg.com/vi/pxbsV8QWGic/hqdefault.jpg',
       url: 'https://www.youtube.com/watch?v=pxbsV8QWGic'
-     )
+    )
 
-     expect(resource.valid?).to eq(true)
+    expect(resource.valid?).to eq(true)
   end
 end

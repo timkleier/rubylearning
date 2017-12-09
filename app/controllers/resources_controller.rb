@@ -9,8 +9,7 @@ class ResourcesController < ApplicationController
 
   # GET /resources/1
   # GET /resources/1.json
-  def show
-  end
+  def show; end
 
   # GET /resources/new
   def new
@@ -22,8 +21,7 @@ class ResourcesController < ApplicationController
   end
 
   # GET /resources/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /resources
   def create

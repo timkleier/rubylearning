@@ -1,3 +1,4 @@
+# Resource model
 class Resource < ApplicationRecord
   attr_accessor :title_truncated, :description_truncated
 
@@ -14,20 +15,16 @@ class Resource < ApplicationRecord
   rescue MetaInspector::TimeoutError
     enqueue_for_future_fetch_attempt(scraped_url)
   rescue MetaInspector::RequestError, MetaInspector::ParserError
-    "There was an error in the request--please check the url"
+    'There was an error in the request--please check the url'
   else
     create_from_url(scraped_url, attributes)
   end
   
   def self.create_from_url(scraped_url, attributes = {})
     resource = Resource.new
-    
-    ['title', 'description', 'url'].each do |scraped_attribute|
-      resource.send("#{scraped_attribute}=", scraped_url.send(scraped_attribute))
-    end
+    %w[title description url].each {|attr| resource.send("#{attr}=", scraped_url.send(attr))}
     resource.image_url = scraped_url.images.best
-    
-    attributes.keys.each do |key|
+    attributes.each_key do |key|
       resource.send("#{key}=", attributes[key])
     end
   rescue StandardError => e
@@ -35,15 +32,15 @@ class Resource < ApplicationRecord
   else
     resource
   end
-  
+
   # # TODO: right tests for this after_find method as well as attributes below
   # after_find do |resource|
   #   title_truncated = title.truncate(60) if title
   #   description_truncated = description.truncate(200) if description
   # end
-  
-  def attributes
-    super.merge('title_truncated' => title_truncated, 'description_truncated' => description_truncated)
-  end
-  
+
+  # def attributes
+  #   super.merge('title_truncated' => title_truncated, 'description_truncated' => description_truncated)
+  # end
+
 end

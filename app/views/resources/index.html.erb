@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= form_tag(new_resource_path, method: 'get', id: 'add_scraped_resource', class: 'ui form') do %>
+  <div class="ui action input">
+    <%= text_field_tag :url, nil, placeholder: "Enter URL" %>
+    <%= submit_tag "Add Resource", class: "ui grey button" %>
+  </div>
+<% end %>  
 
 <div id="resource_cards" class="ui cards">
   <% Resource.all.each do |resource| %>
@@ -7,7 +12,7 @@
   <% Resource.all.each do |resource| %>
     <div class="ui fluid resource card">
       <div class="content">
-        <img class="right floated mini ui image" src=<%= resource.image_url %> />
+        <%= image_tag(resource.image_url, class: 'right floated mini ui image') if resource.image_url %>
         <div class="view_and_votes">
           <div class="ui red fluid button">VIEW</div>
           <div class="ui fluid votes mini action input">
@@ -34,10 +39,3 @@
     </div>
   <% end %>
 </div>
-
-<%= form_tag(new_resource_path, method: 'get', class: "ui form") do %>
-  <div class="ui action input">
-    <%= text_field_tag :url, nil, placeholder: "Enter URL" %>
-    <%= submit_tag "Add Resource", class: "ui grey button" %>
-  </div>
-<% end %>  

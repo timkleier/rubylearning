@@ -11,7 +11,8 @@
     <div id="logo_container" class="red_background">
       <%= image_tag "logo.png", id: "logo", alt: "RubyRailway logo", class: "ui fluid image" %>
     </div>
-    <%= render "layouts/menu" %>
+    <%= render 'layouts/menu' %>
+    <%= render 'layouts/flash_message' if flash[:notice] %>
     <%= yield %>
   </div>
 </body>

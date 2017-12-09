@@ -15,12 +15,17 @@ a, a:hover { color: black !important; }
 }
 
 #menu_container {
+  margin-bottom: 0.875em;
   .right.menu { 
     .item:first-child { padding: 5px 10px; }
   }
 }
 
-#resource_cards .resource .description { clear: none; }
+#resource_cards {
+  .resource .description { clear: none; }
+}
+
+#add_scraped_resource { margin: 0.875em 0; }
 
 .view_and_votes {
   width: 110px;

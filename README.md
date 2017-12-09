@@ -26,8 +26,17 @@ Resource.scrape('http://example.com')
 ```
 It uses MetaInspector to scrape the url and create a new record with all the relevant metadata. Too easy.
 
+### Testing Philosophy
+Use the minimalist testing philosophy outlined by Sandi Metz in her [2013 Rails Conf talk](https://www.youtube.com/watch?v=URSWYvyc42M&t=1666s):
+* Incoming Query Messages: Assert Result
+* Incoming Command Messages: Assert Direct Public Side Effects
+* Messages Sent to Self, Outgoing Query Messages: Don't Test
+* Outgoing Command Messages: Expect to Send
+
+This testing philosophy preserves responsibility of objects and avoids duplication and (sigh) bloated test suites
+
 ### TODO
-Get in the [React mindset](https://reactjs.org/docs/thinking-in-react.html) and implement [CRUD React functions](https://github.com/applegrain/creact)
+See Issues
 
 
 ## Project Vision
