@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Meta Tags</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Meta type</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meta_tags.each do |meta_tag| %>
+      <tr>
+        <td><%= meta_tag.meta_type %></td>
+        <td><%= meta_tag.name %></td>
+        <td><%= link_to 'Show', meta_tag %></td>
+        <td><%= link_to 'Edit', edit_meta_tag_path(meta_tag) %></td>
+        <td><%= link_to 'Destroy', meta_tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Meta Tag', new_meta_tag_path %>

@@ -2,8 +2,9 @@ require 'rails_helper'
 #<Resource title: nil, description: nil, url: nil, root_url: nil, host: nil, image_url: nil>
 RSpec.describe Resource, type: :model do
 
-  context 'scrapes provided URL' do
+  describe 'scrapes provided URL' do
     resource = Resource.scrape('https://www.google.com', true)
+    
     it "when building a resource, returns title and custom description" do
       expect(resource.title).to eq("Google")
     end
@@ -12,9 +13,10 @@ RSpec.describe Resource, type: :model do
     end
   end
   
-  context 'builds record from scraped URL' do
+  describe 'builds record from scraped URL' do
     scraped_url = Resource.scrape('https://www.google.com')
     resource = Resource.build_from_scraped_url(scraped_url, { description: "Custom Description" })
+    
     it 'returns a custom description' do
       expect(resource.description).to eq('Custom Description')
     end

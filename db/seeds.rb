@@ -15,3 +15,13 @@ Resource.scrape('http://codeschool.com', { skill_level: "varied", ruby_or_rails:
 Resource.scrape('http://railstutorial.org/book', { skill_level: "beginner", ruby_or_rails: "rails" })
 Resource.scrape('http://rubyweekly.com', { skill_level: "advanced", ruby_or_rails: "ruby" })
 Resource.scrape('http://awesome-ruby.com', { skill_level: "varied", ruby_or_rails: "both" })
+
+MetaTag.create(meta_type: :resource_type, name: 'Tutorial')
+MetaTag.create(meta_type: :resource_type, name: 'Course')
+MetaTag.create(meta_type: :resource_type, name: 'Screencast')
+MetaTag.create(meta_type: :resource_type, name: 'Book')
+
+MetaTag.create(meta_type: :skill_level, name: 'All')
+MetaTag.create(meta_type: :skill_level, name: 'Beginner')
+MetaTag.create(meta_type: :skill_level, name: 'Intermediate')
+MetaTag.create(meta_type: :skill_level, name: 'Advanced')
